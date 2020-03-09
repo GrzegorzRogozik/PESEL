@@ -2,6 +2,8 @@ package com.uam;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.lang.reflect.Array;
+import java.util.HashMap;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -35,8 +37,6 @@ public class Pesel {
                 System.out.println("Jeszcze raz y/n");
                 continuePlay = scanner.next();
             }
-            //TODO if pesel prawidlowy zapisac pesel w innym wypadku olac
-            //TODO zapis do pliku, za kazdym razem sprawdzac czy jest juz taki pesel, jak tak to nadpisac, a jak nie to dodac - JSON
         }else if(gra.equalsIgnoreCase("n")){
             System.out.println("cya");
         }
@@ -121,7 +121,44 @@ public class Pesel {
         }
     }
     public boolean checkIfPeselExistInFileAndOverwritte(String PESEL, String username, String city, String surname){
-        return true;
+        boolean checkedPeselinFile = true;
+        JSONParser jsonParser = new JSONParser();
+
+        try (FileReader reader = new FileReader("PESEL.json")) {
+            Object obj = jsonParser.parse(reader);
+            JSONArray peselListOld = (JSONArray) obj;
+
+            for (int i =0; i< peselListOld.size();i++){
+                JSONObject singlePesel = (JSONObject) peselListOld.get(i);
+                String checkedPesel = (String) singlePesel.get("PESEL");
+                if (checkedPesel.matches(PESEL)){
+                    peselListOld.remove(i);
+                    JSONObject newPeselValues = new JSONObject();
+                    newPeselValues.put("PESEL", PESEL);
+                    newPeselValues.put("name", username);
+                    newPeselValues.put("surname", surname);
+                    newPeselValues.put("city", city);
+                    checkedPeselinFile = false;
+                    peselListOld.add(newPeselValues);
+
+                    try (FileWriter file = new FileWriter("PESEL.json")) {
+
+                        file.write(peselListOld.toJSONString());
+                        file.flush();
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        } catch (FileNotFoundException e) {
+            checkedPeselinFile = true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return checkedPeselinFile;
     }
     public void addNewPeselToFile(String PESEL, String username, String city, String surname){
         JSONParser jsonParser = new JSONParser();
@@ -131,13 +168,12 @@ public class Pesel {
             JSONArray peselListOld = (JSONArray) obj;
 
             JSONObject peselDetails = new JSONObject();
+            peselDetails.put("PESEL", PESEL);
             peselDetails.put("name", username);
             peselDetails.put("surname", surname);
             peselDetails.put("city", city);
 
-            JSONObject peselObject = new JSONObject();
-            peselObject.put(PESEL, peselDetails);
-            peselListOld.add(peselObject);
+            peselListOld.add(peselDetails);
 
             try (FileWriter file = new FileWriter("PESEL.json")) {
 
@@ -158,3 +194,4 @@ public class Pesel {
 
     }
 }
+//TODO napisac testy

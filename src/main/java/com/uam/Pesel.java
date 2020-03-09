@@ -1,14 +1,11 @@
 package com.uam;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
 import java.lang.reflect.Array;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.io.FileWriter;
-import java.io.IOException;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -18,6 +15,15 @@ import org.json.simple.parser.ParseException;
 public class Pesel {
 
     public static void main(String [] args){
+        JSONArray emptyArray = new JSONArray();
+        try (FileWriter file = new FileWriter("PESEL.json")) {
+
+            file.write(emptyArray.toJSONString());
+            file.flush();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Scanner scanner = new Scanner(System.in);
         System.out.println("Wanna play a game y/n");
         String gra = scanner.next();
@@ -26,7 +32,6 @@ public class Pesel {
             while (continuePlay.equalsIgnoreCase("y")) {
                 Pesel m = new Pesel();
                 String city = m.getCity();
-                //TODO validacja imienia i nazwiska - bez znaków specjalnych i cyfer
                 String username = m.getName();
                 String surname = m.getSurname();
                 String PESEL = m.getPESEL();
@@ -194,4 +199,3 @@ public class Pesel {
 
     }
 }
-//TODO napisac testy

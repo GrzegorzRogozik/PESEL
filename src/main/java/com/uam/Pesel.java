@@ -1,5 +1,7 @@
 package com.uam;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -8,6 +10,8 @@ import java.io.IOException;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 public class Pesel {
 
@@ -120,24 +124,37 @@ public class Pesel {
         return true;
     }
     public void addNewPeselToFile(String PESEL, String username, String city, String surname){
-        JSONObject peselDetails = new JSONObject();
-        peselDetails.put("name", username);
-        peselDetails.put("surname", surname);
-        peselDetails.put("city", city);
+        JSONParser jsonParser = new JSONParser();
 
-        JSONObject peselObject = new JSONObject();
-        peselObject.put(PESEL, peselDetails);
+        try (FileReader reader = new FileReader("PESEL.json")) {
+            Object obj = jsonParser.parse(reader);
+            JSONArray peselListOld = (JSONArray) obj;
 
-        JSONArray employeeList = new JSONArray();
-        employeeList.add(peselObject);
+            JSONObject peselDetails = new JSONObject();
+            peselDetails.put("name", username);
+            peselDetails.put("surname", surname);
+            peselDetails.put("city", city);
 
-        try (FileWriter file = new FileWriter("PESEL.json")) {
+            JSONObject peselObject = new JSONObject();
+            peselObject.put(PESEL, peselDetails);
+            peselListOld.add(peselObject);
 
-            file.write(employeeList.toJSONString());
-            file.flush();
+            try (FileWriter file = new FileWriter("PESEL.json")) {
 
-        } catch (IOException e) {
+                file.write(peselListOld.toJSONString());
+                file.flush();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
+
+
     }
 }

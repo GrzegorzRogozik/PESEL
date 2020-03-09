@@ -3,6 +3,11 @@ package com.uam;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 public class Pesel {
 
@@ -20,7 +25,9 @@ public class Pesel {
                 String surname = m.getSurname();
                 String PESEL = m.getPESEL();
                 boolean save = m.peselValidation(PESEL);
-                System.out.println(save + " " + PESEL);
+                if (save == true){
+                    m.writePeselToFile(PESEL, username, city, surname);
+                }
                 System.out.println("Jeszcze raz y/n");
                 continuePlay = scanner.next();
             }
@@ -103,5 +110,34 @@ public class Pesel {
         }
 
     }
+    public void writePeselToFile(String PESEL, String username, String city, String surname){
+        boolean newPesel = this.checkIfPeselExistInFileAndOverwritte(PESEL, username, city, surname );
+        if (newPesel == true){
+            this.addNewPeselToFile(PESEL, username, city, surname);
+        }
+    }
+    public boolean checkIfPeselExistInFileAndOverwritte(String PESEL, String username, String city, String surname){
+        return true;
+    }
+    public void addNewPeselToFile(String PESEL, String username, String city, String surname){
+        JSONObject peselDetails = new JSONObject();
+        peselDetails.put("name", username);
+        peselDetails.put("surname", surname);
+        peselDetails.put("city", city);
 
+        JSONObject peselObject = new JSONObject();
+        peselObject.put(PESEL, peselDetails);
+
+        JSONArray employeeList = new JSONArray();
+        employeeList.add(peselObject);
+
+        try (FileWriter file = new FileWriter("PESEL.json")) {
+
+            file.write(employeeList.toJSONString());
+            file.flush();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

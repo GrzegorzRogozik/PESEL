@@ -1,8 +1,6 @@
 package com.uam;
 
 import java.io.*;
-import java.lang.reflect.Array;
-import java.util.HashMap;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -32,7 +30,7 @@ public class Pesel {
             while (continuePlay.equalsIgnoreCase("y")) {
                 Pesel m = new Pesel();
                 String city = m.getCity();
-                String username = m.getName();
+                String username = m.getName(); //TODO walidacja wejscia - brak cyfr i znaków specjalnych
                 String surname = m.getSurname();
                 String PESEL = m.getPESEL();
                 boolean save = m.peselValidation(PESEL);
@@ -48,22 +46,55 @@ public class Pesel {
 
     }
     public String getName(){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Podaj imię");
-        String username = scanner.next();
+        boolean validator = false;
+        String username = null;
+        while (validator == false) {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Podaj imię");
+            username = scanner.next();
+            Pattern compiledPattern = Pattern.compile("[a-zA-Z]+");
+            Matcher matcher = compiledPattern.matcher(username);
+            if (matcher.matches() == true){
+                validator = true;
+            }else{
+                System.out.println("Imię nie może zawierć cyfr, ani znaków specjalnych");
+            }
+        }
         return username;
 
     }
     public String getSurname(){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Podaj nazwisko");
-        String surname = scanner.next();
+        boolean validator = false;
+        String surname = null;
+        while (validator == false) {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Podaj nazwisko");
+            surname = scanner.next();
+            Pattern compiledPattern = Pattern.compile("[a-zA-Z]+");
+            Matcher matcher = compiledPattern.matcher(surname);
+            if (matcher.matches() == true){
+                validator = true;
+            }else{
+                System.out.println("Nazwisko nie może zawierć cyfr, ani znaków specjalnych");
+            }
+        }
         return surname;
     }
     public String getCity(){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Podaj miasto");
-        String city = scanner.next();
+        boolean validator = false;
+        String city = null;
+        while (validator == false) {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Podaj miasto");
+            city = scanner.next();
+            Pattern compiledPattern = Pattern.compile("[a-zA-Z]+");
+            Matcher matcher = compiledPattern.matcher(city);
+            if (matcher.matches() == true){
+                validator = true;
+            }else{
+                System.out.println("Miasto nie może zawierć cyfr, ani znaków specjalnych");
+            }
+        }
         return city;
     }
     public String getPESEL(){

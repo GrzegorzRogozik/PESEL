@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6432c7c8-8de4-49d9-8660-fc45d7e3a6ce" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PESEL.json" beforeDir="false" afterPath="$PROJECT_DIR$/PESEL.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/uam/Pesel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uam/Pesel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/uam/Pesel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/uam/Pesel.class" afterDir="false" />
     </list>
@@ -28,8 +29,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/uam/Pesel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="282">
-              <caret line="20" column="33" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="33" />
+            <state relative-caret-position="76">
+              <caret line="54" column="67" lean-forward="true" selection-start-line="54" selection-start-column="67" selection-end-line="54" selection-end-column="67" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -41,7 +42,7 @@
         <entry file="file://$PROJECT_DIR$/PESEL.json">
           <provider selected="true" editor-type-id="text-editor">
             <state>
-              <caret column="81" selection-start-column="81" selection-end-column="81" />
+              <caret column="2" selection-start-column="2" selection-end-column="2" />
             </state>
           </provider>
         </entry>
@@ -115,7 +116,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1583791991660" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1583869262052" />
     <property name="extract.method.default.visibility" value="private" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/java" />
     <property name="project.structure.last.edited" value="Project" />
@@ -179,12 +180,12 @@
       <option name="presentableId" value="Default" />
       <updated>1583080687865</updated>
       <workItem from="1583080696023" duration="14015000" />
-      <workItem from="1583780886201" duration="11176000" />
+      <workItem from="1583780886201" duration="12816000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="31313000" />
+    <option name="totallyTimeSpent" value="32953000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -307,14 +308,14 @@
     <entry file="file://$PROJECT_DIR$/PESEL.json">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret column="81" selection-start-column="81" selection-end-column="81" />
+          <caret column="2" selection-start-column="2" selection-end-column="2" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/uam/Pesel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="20" column="33" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="33" />
+        <state relative-caret-position="76">
+          <caret line="54" column="67" lean-forward="true" selection-start-line="54" selection-start-column="67" selection-end-line="54" selection-end-column="67" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
